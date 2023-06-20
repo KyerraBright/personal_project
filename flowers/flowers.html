@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Plant Gallery</title>
+  <style>
+    .plant-gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .plant-card {
+      width: 200px;
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: center;
+    }
+    .plant-card img {
+      width: 100%;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="plant-gallery"></div>
+
+  <script>
+    // Function to create the gallery
+    function createPlantGallery(plants) {
+      const galleryContainer = document.querySelector('.plant-gallery');
+
+      plants.forEach((plant) => {
+        const plantCard = document.createElement('div');
+        plantCard.classList.add('plant-card');
+
+        const plantImage = document.createElement('img');
+        plantImage.src = plant.image_url;
+
+        const plantName = document.createElement('h3');
+        plantName.textContent = plant.name;
+
+        const plantDescription = document.createElement('p');
+        plantDescription.textContent = plant.description;
+
+        plantCard.appendChild(plantImage);
+        plantCard.appendChild(plantName);
+        plantCard.appendChild(plantDescription);
+
+        galleryContainer.appendChild(plantCard);
+      });
+    }
+
+    // Make API request to retrieve plant data
+    const plantQueries = ['Carnations', 'Gardenias', 'Jasmine', 'Lilacs', 'Peonies', 'Roses', 'Chrysanthemums', 'Daffodils', 'Daisies', 'Sunflowers', 'Calla Lilies', 'Gerbera Daisies', 'Orchids', 'Snapdragons', 'Tulips', 'Freesia', 'Hyacinths', 'Irises', 'Lilies', 'Magnolias'];
+
+    const options = {
+      method: 'GET',
+      headers: {
+        'X-RapidAPI-Key': 'd010VfHoJfZRykaDdrX8JMv61-LwringY2leRaKLv78',
+        'X-RapidAPI-Host': 'https://trefle.io/api/v1/plants?token=d010VfHoJfZRykaDdrX8JMv61-LwringY2leRaKLv78'
+      }
+    };
+
+    const galleryContainer = document.querySelector('.plant-gallery');
+
+    async function fetchPlantData(query) {
+      const apiUrl = `https://trefle.io/api/v1/plants?token=d010VfHoJfZRykaDdrX8JMv61-LwringY2leRaKLv78`;
+
+      try {
+        const response = await fetch(apiUrl, options);
+        const data = await response.json();
+        const plants = data.results; // Adjust based on the actual response structure
+        createPlantGallery(plants);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    async function fetchAllPlantData() {
+      for (const query of plantQueries) {
+        await fetchPlantData(query);
+      }
+    }
+
+    fetchAllPlantData();
+  </script>
+</body>
+</html>
