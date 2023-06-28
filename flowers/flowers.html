@@ -28,60 +28,87 @@
     function createPlantGallery(plants) {
       const galleryContainer = document.querySelector('.plant-gallery');
 
+      if (!Array.isArray(plants)) {
+        console.error('Invalid plant data:', plants);
+        return;
+      }
+
       plants.forEach((plant) => {
         const plantCard = document.createElement('div');
         plantCard.classList.add('plant-card');
-
-        const plantImage = document.createElement('img');
-        plantImage.src = plant.image_url;
 
         const plantName = document.createElement('h3');
         plantName.textContent = plant.name;
 
         const plantDescription = document.createElement('p');
         plantDescription.textContent = plant.description;
+        
+        // Create an unordered list for displaying plant information
+        const plantInfoList = document.createElement('ul');
+        
+        const idItem = document.createElement('li');
+        idItem.textContent = `ID: ${plant.id}`;
+        plantInfoList.appendChild(idItem);
+        
+        const latinNameItem = document.createElement('li');
+        latinNameItem.textContent = `Latin Name: ${plant.latin}`;
+        plantInfoList.appendChild(latinNameItem);
+        
+        const familyItem = document.createElement('li');
+        familyItem.textContent = `Family: ${plant.family}`;
+        plantInfoList.appendChild(familyItem);
+        
+        const commonNamesItem = document.createElement('li');
+        commonNamesItem.textContent = `Common Names: ${plant.common.join(', ')}`;
+        plantInfoList.appendChild(commonNamesItem);
+        
+        const categoryItem = document.createElement('li');
+        categoryItem.textContent = `Category: ${plant.category}`;
+        plantInfoList.appendChild(categoryItem);
 
-        plantCard.appendChild(plantImage);
         plantCard.appendChild(plantName);
         plantCard.appendChild(plantDescription);
+        plantCard.appendChild(plantInfoList);
 
         galleryContainer.appendChild(plantCard);
       });
     }
 
-    // Make API request to retrieve plant data
-    const plantQueries = ['Carnations', 'Gardenias', 'Jasmine', 'Lilacs', 'Peonies', 'Roses', 'Chrysanthemums', 'Daffodils', 'Daisies', 'Sunflowers', 'Calla Lilies', 'Gerbera Daisies', 'Orchids', 'Snapdragons', 'Tulips', 'Freesia', 'Hyacinths', 'Irises', 'Lilies', 'Magnolias'];
 
-    const options = {
+    // Make API request to retrieve plant data
+    const apiKey = 'jNCeoTxPM48cTJGef5EDYflLIzzCttt8bPM8jNtWi9xkUjLewR';
+    const apiUrl = 'https://plant.id/api/v3'; // Update with the correct API endpoint URL
+
+    fetch(apiUrl, {
       method: 'GET',
       headers: {
-        'X-RapidAPI-Key': 'd010VfHoJfZRykaDdrX8JMv61-LwringY2leRaKLv78',
-        'X-RapidAPI-Host': 'https://trefle.io/api/v1/plants?token=d010VfHoJfZRykaDdrX8JMv61-LwringY2leRaKLv78'
+        'X-RapidAPI-Key': apiKey,
+        'Content-Type': 'application/json'
       }
-    };
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (!Array.isArray(data)) {
+          throw new Error('Invalid response data');
+        }
 
-    const galleryContainer = document.querySelector('.plant-gallery');
+        const plants = data.slice(0, 100); // Get the first 100 plants
 
-    async function fetchPlantData(query) {
-      const apiUrl = `https://trefle.io/api/v1/plants?token=d010VfHoJfZRykaDdrX8JMv61-LwringY2leRaKLv78`;
+        // Process the plants data
+        plants.forEach(plant => {
+          console.log('ID:', plant.id);
+          console.log('Latin Name:', plant.latin);
+          console.log('Family:', plant.family);
+          console.log('Common Names:', plant.common.join(', '));
+          console.log('Category:', plant.category);
+          console.log('---');
+        });
 
-      try {
-        const response = await fetch(apiUrl, options);
-        const data = await response.json();
-        const plants = data.results; // Adjust based on the actual response structure
-        createPlantGallery(plants);
-      } catch (error) {
-        console.error(error);
-      }
-    }
-
-    async function fetchAllPlantData() {
-      for (const query of plantQueries) {
-        await fetchPlantData(query);
-      }
-    }
-
-    fetchAllPlantData();
+        createPlantGallery(plants); // Create the plant gallery
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
   </script>
 </body>
 </html>

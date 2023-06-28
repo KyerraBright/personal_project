@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+</head>
+<body>
+    <div id="cart-items"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const cartItemsContainer = document.getElementById('cart-items');
+
+            // Retrieve the selected plant information from local storage
+            const selectedPlant = JSON.parse(localStorage.getItem('selectedPlant'));
+
+            if (selectedPlant) {
+                // Display the selected plant information
+                const plantName = document.createElement('h3');
+                plantName.textContent = selectedPlant.name;
+                cartItemsContainer.appendChild(plantName);
+
+                const plantDescription = document.createElement('p');
+                plantDescription.textContent = selectedPlant.description;
+                cartItemsContainer.appendChild(plantDescription);
+
+                // Process other properties as needed and append them to the cartItemsContainer
+                // ...
+
+                // Clear the selectedPlant value from local storage
+                localStorage.removeItem('selectedPlant');
+            } else {
+                // No selected plant found in local storage
+                const noItemsMessage = document.createElement('p');
+                noItemsMessage.textContent = 'No items in the cart.';
+                cartItemsContainer.appendChild(noItemsMessage);
+            }
+        });
+    </script>
+</body>
+</html>
