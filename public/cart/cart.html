@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+</head>
+<body>
+    <div id="cart-items"></div>
+
+    <script>
+        // Retrieve the cart items from storage
+        const cartItems = JSON.parse(localStorage.getItem('cartItems'));
+
+        // Get the cart-items div
+        const cartItemsDiv = document.getElementById('cart-items');
+
+        // Check if there are any cart items
+        if (cartItems && cartItems.length > 0) {
+            // Iterate over the cart items and display them
+            // Iterate over the cart items and display them
+            cartItems.forEach((item) => {
+                // Create HTML elements for each cart item
+                const itemContainer = document.createElement('div');
+                const itemName = document.createElement('h3');
+                const itemImage = document.createElement('img');
+                const itemPrice = document.createElement('p');
+
+                // Set the content and attributes for the elements
+                itemName.textContent = item.name;
+                itemImage.src = item.image;
+                itemImage.alt = item.name;
+                itemPrice.textContent = item.price;
+
+                // Append the elements to the item container
+                itemContainer.appendChild(itemName);
+                itemContainer.appendChild(itemImage);
+                itemContainer.appendChild(itemPrice);
+
+                // Append the item container to the cart-items div
+                cartItemsDiv.appendChild(itemContainer);
+                });
+
+        }
+    </script>
+</body>
+</html>

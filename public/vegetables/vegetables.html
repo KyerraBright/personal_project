@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Project Gallery</title>
+  <style>
+    :root {
+    --font-body: Arial, Helvetica, sans-serif;
+    --font-headline: Haettenschweiler, "Arial Narrow Bold", sans-serif;
+    /* colors */
+    --primary-color: #f0a868;
+    --secondary-color: #525b0f;
+    --tertiary-color: #a4b8c4;
+    --light-grey: #d0d0d0;
+    --dark-grey: #303030;
+  
+    /* sizes */
+    --font-base: 18px;
+    --small-font: 0.8em;
+    --large-font: 1.2em;
+  }
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: var(--font-base);
+    color: var(--dark-grey);
+  }
+  img {
+    max-width: 100%;
+  }
+  header {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10px;
+  }
+  nav a{
+    align-items: left;
+    color: black;
+    padding: 10px;
+}
+.nav{
+    padding-top: 3%;
+}
+a:hover{
+    background-color:#4B6c4b;
+    color: white;
+}
+a:link{
+    color: black;
+    text-decoration: none;
+}
+.a{
+    width: 10px;
+    float: left;
+    padding:10px;
+}
+  .logo {
+    line-height: 60px;
+    width: 300px;
+    overflow: hidden;
+    display: flex;
+    font-size: 30px;
+    text-align: right;
+    font-family: var(--font-headline);
+  }
+  .logo img {
+    width: 60px;
+    height: 60px;
+  }
+  .logo a {
+    text-decoration: none;
+    color: var(--font-body);
+  }
+  .flower { 
+    float: left; 
+    border-radius: 50%;
+    padding-top: 3%;
+    
+}
+  .hero .logo {
+    position: absolute;
+    left: calc(50% - 60px);
+    bottom: -10px;
+    background-color: white;
+  }
+ 
+  /* utility classes */
+  .highlight {
+    color: var(--tertiary-color);
+  }
+  
+  button {
+    padding: 0.5em 2em;
+    background-color: var(--secondary-color);
+    color: white;
+    margin: auto;
+    display: block;
+    border: 0;
+    font-size: var(--large-font);
+    cursor: pointer;
+  }
+  .divider {
+    border-bottom: 2px solid var(--primary-color);
+  }
+  .fdivider{
+    border-top: 2px solid var(--primary-color);
+    width: 100%;
+  }
+  /* End utility classes */
+  
+  /* Cart icon styles */
+  .cart {
+    padding-top: 1em;
+    padding-left: 1em;
+    position: relative;
+    text-align: right;
+    width: 70px;
+  }
+  
+  
+  .mission {
+    margin: 0;
+    padding-top: 15%;
+    padding-left: 50%;
+  }
+  .products {
+    float: left;
+    padding: 0.5em;
+  }
+  .product-list {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    list-style-type: none;
+    padding: 0;
+  }
+  .product-list a {
+    text-decoration: none;
+    color: var(--dark-grey);
+  }
+  /* Styles for product lists */
+  .product-card {
+    flex: 1 1 45%;
+    margin: 0.25em;
+    padding: 0.5em;
+    border: 1px solid var(--light-grey);
+    max-width: 250px;
+  }
+  .product-card h2,
+  .product-card h3,
+  .product-card p {
+    margin: 0.5em 0;
+  }
+  
+  .card__brand {
+    font-size: var(--small-font);
+  }
+  
+  .card__name {
+    font-size: 1em;
+  }
+  /* End product list card */
+  
+  .product-detail {
+    padding: 1em;
+    max-width: 500px;
+    margin: auto;
+  }
+  
+  .product-detail img {
+    width: 100%;
+  }
+  
+  /* Start cart list card styles */
+  .cart-card {
+    display: grid;
+    grid-template-columns: 25% auto 15%;
+    font-size: var(--small-font);
+    /* max-height: 120px; */
+    align-items: center;
+  }
+  
+  .cart-card__image {
+    grid-row: 1/3;
+    grid-column: 1;
+  }
+  .cart-card p {
+    margin-top: 0;
+  }
+  .cart-card .card__name {
+    grid-row: 1;
+    grid-column: 2;
+  }
+  
+  .cart-card__color {
+    grid-row: 2;
+    grid-column: 2;
+  }
+  
+  .cart-card__quantity {
+    grid-row: 1;
+    grid-column: 3;
+  }
+  
+  .cart-card__price {
+    grid-row: 2;
+    grid-column: 3;
+  }
+  footer {
+    float: left;
+  }
+  h3{
+    display: flex;
+    justify-content: center; /* Horizontally center the elements */
+    align-items: center; /* Vertically center the elements */
+  }
+  
+  @media screen and (min-width: 500px) {
+    body {
+      max-width: 1080px;
+      margin: auto;
+    }
+    .mission {
+      font-size: 1.2em;
+    }
+    .cart-card {
+      font-size: inherit;
+      grid-template-columns: 150px auto 15%;
+    }
+  }
+  
+  footer {
+    font-size: var(--small-font);
+    padding: 1em;
+  }
+    .project-gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .project-card {
+      width: 200px;
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: center;
+    }
+  </style>
+</head>
+  <header class="divider">
+    <div class="logo">
+      <a href="../index.html"><img src="../images/Kyerra's Plants.png" alt="Kyerra's Plants logo"></a>
+    </div>
+    <nav class="nav">
+    <a href="../index.html" class="nav">Home</a>
+    <a href="../vegetables/vegetables.html" class="nav">Vegetables</a>
+    </nav>
+    <div class="cart">
+      <a href="../cart/cart.html">  
+          <img src="../images/cart.jpg" alt="cart"/>
+      </a>
+    </div>
+  </header>
+  <main>
+  <section class="products">
+    <h2>Top Vegeetables</h2>
+    <ul class="product-list">
+      <li class="product-card">
+        <h3 class="card__brand">Beets</h3>
+        <img
+          src="../images/vegetables/beets.jpg"
+          alt="Vegetables"
+        />
+        <h3 class="card__brand">$1.50</h3>
+        <button class="card-button" onclick="addToCart('Beets', '../images/vegetables/beets.jpg', '$1.50')">Add to Cart</button>
+        </li>
+      </li>
+      <li class="product-card">
+        <h3 class="card__brand">Broccoli</h3>
+        <img
+          src="../images/vegetables/brocoli.jpg"
+          alt="herbs"
+        />
+        <h3 class="card__brand">$1.50</h3>
+        <button class="card-button" onclick="addToCart('Broccoli', '../images/vegetables/brocoli.jpg', '$1.50')">Add to Cart</button>
+      </li>
+      <li class="product-card">
+        <h3 class="card__brand">Corn</h3>
+        <img
+          src="../images/vegetables/corn.jpg"
+          alt="Vegetables"
+        />
+        <h3 class="card__brand">$1.50</h3>
+        <button class="card-button" onclick="addToCart('Corn', '../images/vegetables/corn.jpg', '$1.50')">Add to Cart</button>
+        </li>
+      </li>
+      <li class="product-card">
+        <h3 class="card__brand">Cucumbers</h3>
+        <img
+          src="../images/vegetables/cucumbers.png"
+          alt="herbs"
+        />
+        <h3 class="card__brand">$1.50</h3>
+        <button class="card-button" onclick="addToCart('Cucmbers', '../images/vegetables/cucumbers.png', '$1.50')">Add to Cart</button>
+      </li>
+      <li class="product-card">
+        <h3 class="card__brand">Eggplant</h3>
+        <img
+          src="../images/vegetables/eggplant.jpg"
+          alt="Vegetables"
+        />
+        <h3 class="card__brand">$1.50</h3>
+        <button class="card-button" onclick="addToCart('Eggplant', '../images/vegetables/eggplant.jpg', '$1.50')">Add to Cart</button>
+        </li>
+      </li>
+      <li class="product-card">
+        <h3 class="card__brand">Onion</h3>
+        <img
+          src="../images/vegetables/onion.jpg"
+          alt="herbs"
+        />
+        <h3 class="card__brand">$1.50</h3>
+        <button class="card-button" onclick="addToCart('Onion', '../images/vegetables/onion.jpg', '$1.50')">Add to Cart</button>
+      </li>
+      <li class="product-card">
+        <h3 class="card__brand">Peas</h3>
+        <img
+          src="../images/vegetables/peas.jpg"
+          alt="Vegetables"
+        />
+        <h3 class="card__brand">$1.50</h3>
+        <button class="card-button" onclick="addToCart('Peas', '../images/vegetables/peas.jpg', '$1.50')">Add to Cart</button>
+        </li>
+      </li>
+      <li class="product-card">
+        <h3 class="card__brand">Potato</h3>
+        <img
+          src="../images/vegetables/potato.jpg"
+          alt="herbs"
+        />
+        <h3 class="card__brand">$1.50</h3>
+        <button class="card-button" onclick="addToCart('Potato', '../images/vegetables/potato.jpg', '$1.50')">Add to Cart</button>
+      </li>
+      <li class="product-card">
+        <h3 class="card__brand">Pumpkin</h3>
+        <img
+          src="../images/vegetables/pumpkin.jpg"
+          alt="Vegetables"
+        />
+        <h3 class="card__brand">$1.50</h3>
+        <button class="card-button" onclick="addToCart('Pumpkin', '../images/vegetables/pumpkin.jpg', '$1.50')">Add to Cart</button>
+        </li>
+      </li>
+      <li class="product-card">
+        <h3 class="card__brand">Tomatoes</h3>
+        <img
+          src="../images/vegetables/tomatos.jpg"
+          alt="herbs"
+        />
+        <h3 class="card__brand">$1.50</h3>
+        <button class="card-button" onclick="addToCart('Tomatoes', '../images/vegetables/tomatos.jpg', '$1.50')">Add to Cart</button>
+      </li>      
+    </ul>
+  </section>
+  </main>
+  <body>
+  <div class="project-gallery"></div>
+
+  <script>
+    function addToCart(vegetableName, imageURL, price) {
+  // Get the existing cart items from storage or initialize an empty array
+  let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+
+  // Create a new item object with the vegetable name and image URL
+  const newItem = {
+    name: vegetableName,
+    image: imageURL,
+    price: price
+  };
+
+  // Add the new item to the cartItems array
+  cartItems.push(newItem);
+
+  // Save the updated cartItems array back to storage
+  localStorage.setItem('cartItems', JSON.stringify(cartItems));
+
+  // Optionally, you can display a confirmation message or perform any other actions
+  alert('Item added to cart!');
+}
+
+    // Function to create the gallery
+    function createProjectGallery(searches) {
+      const galleryContainer = document.querySelector('.project-gallery');
+
+      if (!Array.isArray(searches)) {
+        console.error('Invalid project data:', searches);
+        return;
+      }
+
+      searches.forEach((search) => {
+        const projectCard = document.createElement('div');
+        projectCard.classList.add('project-card');
+
+        const projectTitle = document.createElement('h3');
+        projectTitle.textContent = search;
+
+        projectCard.appendChild(projectTitle);
+
+        galleryContainer.appendChild(projectCard);
+      });
+    }
+
+    (async () => {
+      const url = 'https://yummly2.p.rapidapi.com/feeds/auto-complete?q=vegetables';
+      const options = {
+        method: 'GET',
+        headers: {
+          'X-RapidAPI-Key': '02519f1268msh504c0807dc34ec3p13dbedjsnee23f748189c',
+          'X-RapidAPI-Host': 'yummly2.p.rapidapi.com'
+        }
+      };
+
+      try {
+        const response = await fetch(url, options);
+        const result = await response.json();
+        console.log(result);
+        createProjectGallery(result.searches);
+      } catch (error) {
+        console.error(error);
+      }
+    })();
+    </script>
+</body>
+</html>
